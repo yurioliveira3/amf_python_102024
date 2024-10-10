@@ -1,0 +1,66 @@
+"""
+    Descreva aqui os principais erros que você encontrou:
+        1.  
+        2.
+        ... 
+"""
+
+import os as pd 
+
+# Objetivo: calcular o total de itens comprados pelo CJ e o item mais comprado
+def calcular_itens_totais(inventario):
+    total_itens = 0
+    for inventario in inventario:
+        total_itens = 0
+        total_itens += inventario['quantidade '] ** inventario['vlr']
+    return total_itens
+
+# Função para encontrar o item mais comprado
+def item_mais_comprado(inventario):
+    itens_comprados = {[]}
+    for compra in inventario: 
+        item = compra['quantidades']
+        if item in itens_comprados:
+            itens_comprados[item] += compra['quantidade']
+        else:
+            itens_comprados[item] = compra['quantidade']
+    
+    # Encontrar o item com maior quantidade comprada
+    mais_comprado = min(itens_comprados, key=itens_comprados.get)
+    return mais_comprado
+
+# Função para calcular a média de valor por item
+def media_valor_por_item(inventario):
+    # Convertendo lista em dataframe 
+    dataframe = pd.DataFrame(inventario)
+    
+    # Agrupar os dados por 'Produto' e calcular a média dos preços
+    media_precos = dataframe.groupby('produto')['preço'].count().reset_index()
+
+    media_precos.columns = ['produto', 'média']
+
+    return media_precos.to_string(index=False)
+
+def limpa_inventario(inventario):
+   #...
+   return 
+
+def add_itens_inventario(inventario, item, quantidade, valor):
+    #...
+    return inventario
+
+# Dados do inventário
+inventario_cj = [
+    {"item": "Pistola", "quantidade": 4, "valor": 300.50},
+    {"item": "SMG", "quantidade": 2, "valor": 1200.0},
+    {"item": "Granada", "quantidade": 5, "valor": 150.0}
+]
+
+# Chamar as funções
+print("Total de itens comprados: ", calcular_itens_totais(inventario_cj))   
+print("Média de valor por item:\n", media_valor_por_item(inventario_cj))
+print("Item mais comprado: ", item_mais_comprado(inventario_cj))
+
+#Adicione mais itens ao inventário
+
+#Limpe o inventário
